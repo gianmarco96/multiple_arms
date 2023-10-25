@@ -72,28 +72,11 @@ print(left_arm.get_current_pose())
 print(right_arm.get_current_pose())
 
 
-# left_arm_pose.pose.position.z = 1.8
-
-
-# right_arm_pose.pose.orientation.z = 1.8
-
-
-# left_arm.set_pose_target(left_arm_pose)
-# right_arm.set_pose_target(right_arm_pose)
-
 print("end e =")
 print(move_group.get_current_pose(end_effector_link="left_arm_link8"))
 
 move_group.set_pose_target(left_arm_pose,end_effector_link="left_arm_link8")
 move_group.set_pose_target(right_arm_pose,end_effector_link="right_arm_link8")
-
-
-# success = right_arm.go(wait=True)
-# right_arm.stop()
-
-# left_arm.go(wait=True)
-# left_arm.stop()
-
 
 success = move_group.go(wait=True)
 move_group.stop()
@@ -109,7 +92,8 @@ right_arm_pose.position.x = 0.50
 right_arm_pose.position.y = -0.50
 right_arm_pose.position.z = 1.75
 
-
+move_group.set_pose_target(left_arm_pose,end_effector_link="left_arm_link8")
+move_group.set_pose_target(right_arm_pose,end_effector_link="right_arm_link8")
 success = move_group.go(wait=True)
 move_group.stop()
 
@@ -126,22 +110,8 @@ right_arm_pose.position.y = -0.42
 right_arm_pose.position.z = 1.65
 
 
-success = move_group.go(wait=True)
-move_group.stop()
-
-# Motion 4
-
-left_arm_pose.orientation.w = 1.0
-left_arm_pose.position.x = 0.45
-left_arm_pose.position.y = 0.42
-left_arm_pose.position.z = 1.65
-
-right_arm_pose.orientation.w = 1.0
-right_arm_pose.position.x = 0.45
-right_arm_pose.position.y = -0.42
-right_arm_pose.position.z = 1.65
-
-
+move_group.set_pose_target(left_arm_pose,end_effector_link="left_arm_link8")
+move_group.set_pose_target(right_arm_pose,end_effector_link="right_arm_link8")
 success = move_group.go(wait=True)
 move_group.stop()
 
