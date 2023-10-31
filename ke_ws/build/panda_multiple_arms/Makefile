@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ubuntu20/ke_ws/src/panda_multiple_arms
+CMAKE_SOURCE_DIR = /home/gianros/multiple_arms/ke_ws/src/panda_multiple_arms
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ubuntu20/ke_ws/build/panda_multiple_arms
+CMAKE_BINARY_DIR = /home/gianros/multiple_arms/ke_ws/build/panda_multiple_arms
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -137,9 +137,9 @@ test/fast: test
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu20/ke_ws/build/panda_multiple_arms/CMakeFiles /home/ubuntu20/ke_ws/build/panda_multiple_arms/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/gianros/multiple_arms/ke_ws/build/panda_multiple_arms/CMakeFiles /home/gianros/multiple_arms/ke_ws/build/panda_multiple_arms/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu20/ke_ws/build/panda_multiple_arms/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/gianros/multiple_arms/ke_ws/build/panda_multiple_arms/CMakeFiles 0
 .PHONY : all
 
 # The main clean target

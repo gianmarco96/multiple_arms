@@ -1,6 +1,6 @@
-devel_space: /home/ubuntu20/ke_ws/devel
+devel_space: /home/gianros/multiple_arms/ke_ws/devel
 install: false
-install_space: /home/ubuntu20/ke_ws/install
+install_space: /home/gianros/multiple_arms/ke_ws/install
 profile: default
-source_space: /home/ubuntu20/ke_ws/src
-workspace: /home/ubuntu20/ke_ws
+source_space: /home/gianros/multiple_arms/ke_ws/src
+workspace: /home/gianros/multiple_arms/ke_ws

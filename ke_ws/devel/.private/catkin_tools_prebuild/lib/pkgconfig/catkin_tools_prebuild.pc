@@ -1,4 +1,4 @@
-prefix=/home/ubuntu20/ke_ws/devel/.private/catkin_tools_prebuild
+prefix=/home/gianros/multiple_arms/ke_ws/devel/.private/catkin_tools_prebuild
 
 Name: catkin_tools_prebuild
 Description: Description of catkin_tools_prebuild

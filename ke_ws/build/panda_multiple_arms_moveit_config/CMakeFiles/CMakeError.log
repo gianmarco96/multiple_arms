@@ -1,21 +1,21 @@
 Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
-Change Dir: /home/ubuntu20/ke_ws/build/panda_multiple_arms_moveit_config/CMakeFiles/CMakeTmp
+Change Dir: /home/gianros/multiple_arms/ke_ws/build/panda_multiple_arms_moveit_config/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_3ac74/fast && /usr/bin/make -f CMakeFiles/cmTC_3ac74.dir/build.make CMakeFiles/cmTC_3ac74.dir/build
-make[1]: Entering directory '/home/ubuntu20/ke_ws/build/panda_multiple_arms_moveit_config/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_3ac74.dir/src.c.o
-/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_3ac74.dir/src.c.o   -c /home/ubuntu20/ke_ws/build/panda_multiple_arms_moveit_config/CMakeFiles/CMakeTmp/src.c
-Linking C executable cmTC_3ac74
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_3ac74.dir/link.txt --verbose=1
-/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD    -rdynamic CMakeFiles/cmTC_3ac74.dir/src.c.o  -o cmTC_3ac74 
-/usr/bin/ld: CMakeFiles/cmTC_3ac74.dir/src.c.o: in function `main':
+Run Build Command(s):/usr/bin/make cmTC_6cebd/fast && /usr/bin/make -f CMakeFiles/cmTC_6cebd.dir/build.make CMakeFiles/cmTC_6cebd.dir/build
+make[1]: Entering directory '/home/gianros/multiple_arms/ke_ws/build/panda_multiple_arms_moveit_config/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_6cebd.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_6cebd.dir/src.c.o   -c /home/gianros/multiple_arms/ke_ws/build/panda_multiple_arms_moveit_config/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_6cebd
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_6cebd.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD    -rdynamic CMakeFiles/cmTC_6cebd.dir/src.c.o  -o cmTC_6cebd 
+/usr/bin/ld: CMakeFiles/cmTC_6cebd.dir/src.c.o: in function `main':
 src.c:(.text+0x46): undefined reference to `pthread_create'
 /usr/bin/ld: src.c:(.text+0x52): undefined reference to `pthread_detach'
 /usr/bin/ld: src.c:(.text+0x63): undefined reference to `pthread_join'
 collect2: error: ld returned 1 exit status
-make[1]: *** [CMakeFiles/cmTC_3ac74.dir/build.make:87: cmTC_3ac74] Error 1
-make[1]: Leaving directory '/home/ubuntu20/ke_ws/build/panda_multiple_arms_moveit_config/CMakeFiles/CMakeTmp'
-make: *** [Makefile:121: cmTC_3ac74/fast] Error 2
+make[1]: *** [CMakeFiles/cmTC_6cebd.dir/build.make:87: cmTC_6cebd] Error 1
+make[1]: Leaving directory '/home/gianros/multiple_arms/ke_ws/build/panda_multiple_arms_moveit_config/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_6cebd/fast] Error 2
 
 
 Source file was:
@@ -39,20 +39,20 @@ int main(void)
 }
 
 Determining if the function pthread_create exists in the pthreads failed with the following output:
-Change Dir: /home/ubuntu20/ke_ws/build/panda_multiple_arms_moveit_config/CMakeFiles/CMakeTmp
+Change Dir: /home/gianros/multiple_arms/ke_ws/build/panda_multiple_arms_moveit_config/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_f2aab/fast && /usr/bin/make -f CMakeFiles/cmTC_f2aab.dir/build.make CMakeFiles/cmTC_f2aab.dir/build
-make[1]: Entering directory '/home/ubuntu20/ke_ws/build/panda_multiple_arms_moveit_config/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_f2aab.dir/CheckFunctionExists.c.o
-/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_f2aab.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
-Linking C executable cmTC_f2aab
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f2aab.dir/link.txt --verbose=1
-/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_f2aab.dir/CheckFunctionExists.c.o  -o cmTC_f2aab  -lpthreads 
+Run Build Command(s):/usr/bin/make cmTC_8dc70/fast && /usr/bin/make -f CMakeFiles/cmTC_8dc70.dir/build.make CMakeFiles/cmTC_8dc70.dir/build
+make[1]: Entering directory '/home/gianros/multiple_arms/ke_ws/build/panda_multiple_arms_moveit_config/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_8dc70.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_8dc70.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_8dc70
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_8dc70.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_8dc70.dir/CheckFunctionExists.c.o  -o cmTC_8dc70  -lpthreads 
 /usr/bin/ld: cannot find -lpthreads
 collect2: error: ld returned 1 exit status
-make[1]: *** [CMakeFiles/cmTC_f2aab.dir/build.make:87: cmTC_f2aab] Error 1
-make[1]: Leaving directory '/home/ubuntu20/ke_ws/build/panda_multiple_arms_moveit_config/CMakeFiles/CMakeTmp'
-make: *** [Makefile:121: cmTC_f2aab/fast] Error 2
+make[1]: *** [CMakeFiles/cmTC_8dc70.dir/build.make:87: cmTC_8dc70] Error 1
+make[1]: Leaving directory '/home/gianros/multiple_arms/ke_ws/build/panda_multiple_arms_moveit_config/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_8dc70/fast] Error 2
 
 
 

@@ -1,4 +1,4 @@
-prefix=/home/ubuntu20/ke_ws/install
+prefix=/home/gianros/multiple_arms/ke_ws/install
 
 Name: catkin_tools_prebuild
 Description: Description of catkin_tools_prebuild

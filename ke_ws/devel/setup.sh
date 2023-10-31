@@ -1,1 +1,1 @@
-/home/ubuntu20/ke_ws/devel/.private/catkin_tools_prebuild/setup.sh
+/home/gianros/multiple_arms/ke_ws/devel/.private/catkin_tools_prebuild/setup.sh

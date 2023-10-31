@@ -3,7 +3,7 @@
 
 # Relative path conversion top directories.
 set(CMAKE_RELATIVE_PATH_TOP_SOURCE "/usr/src/googletest")
-set(CMAKE_RELATIVE_PATH_TOP_BINARY "/home/ubuntu20/ke_ws/build/panda_multiple_arms_moveit_config")
+set(CMAKE_RELATIVE_PATH_TOP_BINARY "/home/gianros/multiple_arms/ke_ws/build/panda_multiple_arms_moveit_config")
 
 # Force unix paths in dependencies.
 set(CMAKE_FORCE_UNIX_PATHS 1)

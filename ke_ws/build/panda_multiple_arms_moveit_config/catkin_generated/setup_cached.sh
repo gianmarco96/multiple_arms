@@ -7,7 +7,7 @@
 # new environment variables
 
 # modified environment variables
-export CMAKE_PREFIX_PATH="/home/ubuntu20/ke_ws/devel/.private/panda_multiple_arms_moveit_config:$CMAKE_PREFIX_PATH"
-export PWD='/home/ubuntu20/ke_ws/build/panda_multiple_arms_moveit_config'
-export ROSLISP_PACKAGE_DIRECTORIES="/home/ubuntu20/ke_ws/devel/.private/panda_multiple_arms_moveit_config/share/common-lisp:$ROSLISP_PACKAGE_DIRECTORIES"
-export ROS_PACKAGE_PATH="/home/ubuntu20/ke_ws/src/panda_multiple_arms_moveit_config:$ROS_PACKAGE_PATH"
+export CMAKE_PREFIX_PATH="/home/gianros/multiple_arms/ke_ws/devel/.private/panda_multiple_arms_moveit_config:$CMAKE_PREFIX_PATH"
+export PWD='/home/gianros/multiple_arms/ke_ws/build/panda_multiple_arms_moveit_config'
+export ROSLISP_PACKAGE_DIRECTORIES="/home/gianros/multiple_arms/ke_ws/devel/.private/panda_multiple_arms_moveit_config/share/common-lisp:$ROSLISP_PACKAGE_DIRECTORIES"
+export ROS_PACKAGE_PATH="/home/gianros/multiple_arms/ke_ws/src/panda_multiple_arms_moveit_config:$ROS_PACKAGE_PATH"

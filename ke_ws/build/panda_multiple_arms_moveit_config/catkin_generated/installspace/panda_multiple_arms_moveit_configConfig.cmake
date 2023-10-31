@@ -67,14 +67,14 @@ set(panda_multiple_arms_moveit_config_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("FALSE" STREQUAL "TRUE")
-  set(panda_multiple_arms_moveit_config_SOURCE_PREFIX /home/ubuntu20/ke_ws/src/panda_multiple_arms_moveit_config)
-  set(panda_multiple_arms_moveit_config_DEVEL_PREFIX /home/ubuntu20/ke_ws/devel/.private/panda_multiple_arms_moveit_config)
+  set(panda_multiple_arms_moveit_config_SOURCE_PREFIX /home/gianros/multiple_arms/ke_ws/src/panda_multiple_arms_moveit_config)
+  set(panda_multiple_arms_moveit_config_DEVEL_PREFIX /home/gianros/multiple_arms/ke_ws/devel/.private/panda_multiple_arms_moveit_config)
   set(panda_multiple_arms_moveit_config_INSTALL_PREFIX "")
   set(panda_multiple_arms_moveit_config_PREFIX ${panda_multiple_arms_moveit_config_DEVEL_PREFIX})
 else()
   set(panda_multiple_arms_moveit_config_SOURCE_PREFIX "")
   set(panda_multiple_arms_moveit_config_DEVEL_PREFIX "")
-  set(panda_multiple_arms_moveit_config_INSTALL_PREFIX /home/ubuntu20/ke_ws/install)
+  set(panda_multiple_arms_moveit_config_INSTALL_PREFIX /home/gianros/multiple_arms/ke_ws/install)
   set(panda_multiple_arms_moveit_config_PREFIX ${panda_multiple_arms_moveit_config_INSTALL_PREFIX})
 endif()
 
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/ubuntu20/ke_ws/install/lib;/home/ubuntu20/ke_ws/devel/lib;/opt/ros/noetic/lib)
+    foreach(path /home/gianros/multiple_arms/ke_ws/install/lib;/home/gianros/multiple_arms/ke_ws/devel/lib;/home/gianros/catkin_ws/devel/lib;/opt/ros/noetic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

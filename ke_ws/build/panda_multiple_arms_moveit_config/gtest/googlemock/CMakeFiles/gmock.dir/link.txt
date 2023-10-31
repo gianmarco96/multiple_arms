@@ -1,1 +1,1 @@
-/usr/bin/c++ -fPIC   -shared -Wl,-soname,libgmock.so -o ../lib/libgmock.so CMakeFiles/gmock.dir/src/gmock-all.cc.o  -Wl,-rpath,/home/ubuntu20/ke_ws/build/panda_multiple_arms_moveit_config/gtest/lib ../lib/libgtest.so -lpthread 
+/usr/bin/c++ -fPIC   -shared -Wl,-soname,libgmock.so -o ../lib/libgmock.so CMakeFiles/gmock.dir/src/gmock-all.cc.o  -Wl,-rpath,/home/gianros/multiple_arms/ke_ws/build/panda_multiple_arms_moveit_config/gtest/lib ../lib/libgtest.so -lpthread 

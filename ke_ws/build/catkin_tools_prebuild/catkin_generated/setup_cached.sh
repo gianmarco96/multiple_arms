@@ -7,7 +7,7 @@
 # new environment variables
 
 # modified environment variables
-export CMAKE_PREFIX_PATH="/home/ubuntu20/ke_ws/devel/.private/catkin_tools_prebuild:$CMAKE_PREFIX_PATH"
-export PWD='/home/ubuntu20/ke_ws/build/catkin_tools_prebuild'
-export ROSLISP_PACKAGE_DIRECTORIES='/home/ubuntu20/ke_ws/devel/.private/catkin_tools_prebuild/share/common-lisp'
-export ROS_PACKAGE_PATH="/home/ubuntu20/ke_ws/build/catkin_tools_prebuild:$ROS_PACKAGE_PATH"
+export CMAKE_PREFIX_PATH="/home/gianros/multiple_arms/ke_ws/devel/.private/catkin_tools_prebuild:$CMAKE_PREFIX_PATH"
+export PWD='/home/gianros/multiple_arms/ke_ws/build/catkin_tools_prebuild'
+export ROSLISP_PACKAGE_DIRECTORIES="/home/gianros/multiple_arms/ke_ws/devel/.private/catkin_tools_prebuild/share/common-lisp:$ROSLISP_PACKAGE_DIRECTORIES"
+export ROS_PACKAGE_PATH="/home/gianros/multiple_arms/ke_ws/build/catkin_tools_prebuild:$ROS_PACKAGE_PATH"

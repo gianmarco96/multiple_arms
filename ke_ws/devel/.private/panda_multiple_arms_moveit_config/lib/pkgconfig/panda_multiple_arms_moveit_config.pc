@@ -1,4 +1,4 @@
-prefix=/home/ubuntu20/ke_ws/devel/.private/panda_multiple_arms_moveit_config
+prefix=/home/gianros/multiple_arms/ke_ws/devel/.private/panda_multiple_arms_moveit_config
 
 Name: panda_multiple_arms_moveit_config
 Description: Description of panda_multiple_arms_moveit_config

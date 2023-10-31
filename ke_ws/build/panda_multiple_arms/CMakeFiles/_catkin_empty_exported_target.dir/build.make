@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/ubuntu20/ke_ws/src/panda_multiple_arms
+CMAKE_SOURCE_DIR = /home/gianros/multiple_arms/ke_ws/src/panda_multiple_arms
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/ubuntu20/ke_ws/build/panda_multiple_arms
+CMAKE_BINARY_DIR = /home/gianros/multiple_arms/ke_ws/build/panda_multiple_arms
 
 # Utility rule file for _catkin_empty_exported_target.
 
@@ -67,6 +67,6 @@ CMakeFiles/_catkin_empty_exported_target.dir/clean:
 .PHONY : CMakeFiles/_catkin_empty_exported_target.dir/clean
 
 CMakeFiles/_catkin_empty_exported_target.dir/depend:
-	cd /home/ubuntu20/ke_ws/build/panda_multiple_arms && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ubuntu20/ke_ws/src/panda_multiple_arms /home/ubuntu20/ke_ws/src/panda_multiple_arms /home/ubuntu20/ke_ws/build/panda_multiple_arms /home/ubuntu20/ke_ws/build/panda_multiple_arms /home/ubuntu20/ke_ws/build/panda_multiple_arms/CMakeFiles/_catkin_empty_exported_target.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/gianros/multiple_arms/ke_ws/build/panda_multiple_arms && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/gianros/multiple_arms/ke_ws/src/panda_multiple_arms /home/gianros/multiple_arms/ke_ws/src/panda_multiple_arms /home/gianros/multiple_arms/ke_ws/build/panda_multiple_arms /home/gianros/multiple_arms/ke_ws/build/panda_multiple_arms /home/gianros/multiple_arms/ke_ws/build/panda_multiple_arms/CMakeFiles/_catkin_empty_exported_target.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/_catkin_empty_exported_target.dir/depend
 
