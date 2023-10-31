@@ -60,19 +60,7 @@ front_right_arm_trajectory_controller:
         - front_right_arm_joint5
         - front_right_arm_joint6
         - front_right_arm_joint7
-    constraints:
-        goal_time: 0.6
-        stopped_velocity_tolerance: 0.05
-        right_arm_joint1: {trajectory: 0.1, goal: 0.1}
-        right_arm_joint2: {trajectory: 0.1, goal: 0.1}
-        right_arm_joint3: {trajectory: 0.1, goal: 0.1}
-        right_arm_joint4: {trajectory: 0.1, goal: 0.1}
-        right_arm_joint5: {trajectory: 0.1, goal: 0.1}
-        right_arm_joint6: {trajectory: 0.1, goal: 0.1}
-        right_arm_joint7: {trajectory: 0.1, goal: 0.1}
-    stop_trajectory_duration: 0.5
-    state_publish_rate:  25
-    action_monitor_rate: 10
+    
 
 front_left_arm_trajectory_controller:
     type: "position_controllers/JointTrajectoryController"
@@ -84,19 +72,6 @@ front_left_arm_trajectory_controller:
         - front_left_arm_joint5
         - front_left_arm_joint6
         - front_left_arm_joint7
-    constraints:
-        goal_time: 0.6
-        stopped_velocity_tolerance: 0.05
-        left_arm_joint1: {trajectory: 0.1, goal: 0.1}
-        left_arm_joint2: {trajectory: 0.1, goal: 0.1}
-        left_arm_joint3: {trajectory: 0.1, goal: 0.1}
-        left_arm_joint4: {trajectory: 0.1, goal: 0.1}
-        left_arm_joint5: {trajectory: 0.1, goal: 0.1}
-        left_arm_joint6: {trajectory: 0.1, goal: 0.1}
-        left_arm_joint7: {trajectory: 0.1, goal: 0.1}
-    stop_trajectory_duration: 0.5
-    state_publish_rate:  25
-    action_monitor_rate: 10
 
 rear_right_arm_trajectory_controller:
     type: "position_controllers/JointTrajectoryController"
@@ -108,19 +83,6 @@ rear_right_arm_trajectory_controller:
         - rear_right_arm_joint5
         - rear_right_arm_joint6
         - rear_right_arm_joint7
-    constraints:
-        goal_time: 0.6
-        stopped_velocity_tolerance: 0.05
-        right_arm_joint1: {trajectory: 0.1, goal: 0.1}
-        right_arm_joint2: {trajectory: 0.1, goal: 0.1}
-        right_arm_joint3: {trajectory: 0.1, goal: 0.1}
-        right_arm_joint4: {trajectory: 0.1, goal: 0.1}
-        right_arm_joint5: {trajectory: 0.1, goal: 0.1}
-        right_arm_joint6: {trajectory: 0.1, goal: 0.1}
-        right_arm_joint7: {trajectory: 0.1, goal: 0.1}
-    stop_trajectory_duration: 0.5
-    state_publish_rate:  25
-    action_monitor_rate: 10
 
 rear_left_arm_trajectory_controller:
     type: "position_controllers/JointTrajectoryController"
@@ -132,19 +94,7 @@ rear_left_arm_trajectory_controller:
         - rear_left_arm_joint5
         - rear_left_arm_joint6
         - rear_left_arm_joint7
-    constraints:
-        goal_time: 0.6
-        stopped_velocity_tolerance: 0.05
-        left_arm_joint1: {trajectory: 0.1, goal: 0.1}
-        left_arm_joint2: {trajectory: 0.1, goal: 0.1}
-        left_arm_joint3: {trajectory: 0.1, goal: 0.1}
-        left_arm_joint4: {trajectory: 0.1, goal: 0.1}
-        left_arm_joint5: {trajectory: 0.1, goal: 0.1}
-        left_arm_joint6: {trajectory: 0.1, goal: 0.1}
-        left_arm_joint7: {trajectory: 0.1, goal: 0.1}
-    stop_trajectory_duration: 0.5
-    state_publish_rate:  25
-    action_monitor_rate: 10
+    
 
 front_right_hand_controller:
     type: "effort_controllers/JointTrajectoryController"
@@ -213,3 +163,5 @@ As mentioned before, Moveit automatically generates some launch files and yaml f
 
 empty_world.launch and bring up do not need changing
 Done but need to explain
+
+REMOVE CONSTRAINTS ABOVE DOES SPEED UP THE SIMULATION
