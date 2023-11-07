@@ -306,3 +306,8 @@ I would not bother with this as these are redunt files which are not used.
 
 ### Gazebo integration
 The files `panda_multiple_arms_empty_world.launch` and  `bringup_moveit.launch` can be left as the tutorial.
+
+## Demo
+If you want to run the demo, open 2 new terminals and copy paste the 2 following commands
+`roslaunch panda_multiple_arms bringup_moveit.launch `
+`rosrun panda_multiple_arms moveit_controller.py`
