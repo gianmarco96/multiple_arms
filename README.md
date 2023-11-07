@@ -1,4 +1,143 @@
 # multiple_arms
+This repo is heavily based on [MoveIt! Multiple Robot Arms Tutorial](https://ros-planning.github.io/moveit_tutorials/doc/multiple_robot_arms/multiple_robot_arms_tutorial.html). The following steps can be applied to any robot platform, however I decided to stick to the panda arm (as apposed to UR, for instance) because these are more prone to multi-robot control, thanks to their more clear xacro/urdf and the absence of custom kinematics or controller (e.g. scaled_controllers).
+
+## Xacro and URDF
+The simulated cell with multiple robots starts with the creation of the xacro file. Once again this step is very similar to the tutorial, I have just added 2 more robots and move all robots closed to each other to make sure they can actually collide (given that the aim of this project is to validate a collision algorithm).
+
+I believe this is self-explainatory but please do not hesitate to contact me if you have any questoins.
+
+
+<details>
+
+<summary>panda_multiple_arms.xacro</summary>
+
+```
+<?xml version="1.0"?>
+<robot name="panda_multiple_arms" xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <!-- add arms names prefixes -->
+    <xacro:arg name="arm_id_1" default="front_right_arm" />
+    <xacro:arg name="arm_id_2" default="front_left_arm" />
+    <xacro:arg name="arm_id_3" default="rear_right_arm" />
+    <xacro:arg name="arm_id_4" default="rear_left_arm" />
+
+    <!-- load arm/hand models and utils (which adds the robot inertia tags to be Gazebo-simulation ready) -->
+    <xacro:include filename="$(find franka_description)/robots/common/utils.xacro" />
+    <xacro:include filename="$(find franka_description)/robots/common/franka_arm.xacro" />
+    <xacro:include filename="$(find franka_description)/robots/common/franka_hand.xacro" />
+
+    <link name="world"/>
+
+    <!-- box shaped table as base for the 4 Pandas -->
+    <link name="base">
+        <visual>
+            <origin xyz="0 0 0.5" rpy="0 0 0" />
+            <geometry>
+                <box size="2 2 1" />
+            </geometry>
+            <material name="White">
+                <color rgba="1.0 1.0 1.0 1.0" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0.5" rpy="0 0 0" />
+            <geometry>
+                <box size="2 2 1" />
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <mass value="20.0"/>
+            <inertia ixx="0.001" ixy="0.0" ixz="0.001" iyy="0.0" iyz="0.0" izz="0.001"/>
+        </inertial>
+        
+    </link>
+
+    <joint name="base_to_world" type="fixed">
+        <parent link="world"/>
+        <child link="base"/>
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    </joint>
+    
+    <!-- front right arm with gripper -->
+    <xacro:franka_arm arm_id="$(arg arm_id_1)" connected_to="base" xyz="0.5 -0.5 1" gazebo="true" safety_distance="0.03" joint_limits="${xacro.load_yaml('$(find franka_description)/robots/panda/joint_limits.yaml')}"/>
+    <xacro:franka_hand arm_id="$(arg arm_id_1)" rpy="0 0 ${-pi/4}" connected_to="$(arg arm_id_1)_link8" gazebo="true" safety_distance="0.03" />
+
+    <!-- front left arm with gripper -->
+    <xacro:franka_arm arm_id="$(arg arm_id_2)" connected_to="base" xyz="0.5 0.5 1" gazebo="true" safety_distance="0.03" joint_limits="${xacro.load_yaml('$(find franka_description)/robots/panda/joint_limits.yaml')}"/>
+    <xacro:franka_hand arm_id="$(arg arm_id_2)" rpy="0 0 ${-pi/4}" connected_to="$(arg arm_id_2)_link8" gazebo="true" safety_distance="0.03" />
+
+    <!-- rear right arm with gripper -->
+    <xacro:franka_arm arm_id="$(arg arm_id_3)" connected_to="base" xyz="-0.5 -0.5 1" gazebo="true" safety_distance="0.03" joint_limits="${xacro.load_yaml('$(find franka_description)/robots/panda/joint_limits.yaml')}"/>
+    <xacro:franka_hand arm_id="$(arg arm_id_3)" rpy="0 0 ${-pi/4}" connected_to="$(arg arm_id_3)_link8" gazebo="true" safety_distance="0.03" />
+
+    <!-- rear left arm with gripper -->
+    <xacro:franka_arm arm_id="$(arg arm_id_4)" connected_to="base" xyz="-0.5 0.5 1" gazebo="true" safety_distance="0.03" joint_limits="${xacro.load_yaml('$(find franka_description)/robots/panda/joint_limits.yaml')}"/>
+    <xacro:franka_hand arm_id="$(arg arm_id_4)" rpy="0 0 ${-pi/4}" connected_to="$(arg arm_id_4)_link8" gazebo="true" safety_distance="0.03" />
+
+
+    <!-- front right arm joints control interface -->
+    <xacro:gazebo-joint joint="$(arg arm_id_1)_joint1" transmission="hardware_interface/PositionJointInterface" />
+    <xacro:gazebo-joint joint="$(arg arm_id_1)_joint2" transmission="hardware_interface/PositionJointInterface" />
+    <xacro:gazebo-joint joint="$(arg arm_id_1)_joint3" transmission="hardware_interface/PositionJointInterface" />
+    <xacro:gazebo-joint joint="$(arg arm_id_1)_joint4" transmission="hardware_interface/PositionJointInterface" />
+    <xacro:gazebo-joint joint="$(arg arm_id_1)_joint5" transmission="hardware_interface/PositionJointInterface" />
+    <xacro:gazebo-joint joint="$(arg arm_id_1)_joint6" transmission="hardware_interface/PositionJointInterface" />
+    <xacro:gazebo-joint joint="$(arg arm_id_1)_joint7" transmission="hardware_interface/PositionJointInterface" />
+
+    <!-- front left arm joints control interface -->
+    <xacro:gazebo-joint joint="$(arg arm_id_2)_joint1" transmission="hardware_interface/PositionJointInterface" />
+    <xacro:gazebo-joint joint="$(arg arm_id_2)_joint2" transmission="hardware_interface/PositionJointInterface" />
+    <xacro:gazebo-joint joint="$(arg arm_id_2)_joint3" transmission="hardware_interface/PositionJointInterface" />
+    <xacro:gazebo-joint joint="$(arg arm_id_2)_joint4" transmission="hardware_interface/PositionJointInterface" />
+    <xacro:gazebo-joint joint="$(arg arm_id_2)_joint5" transmission="hardware_interface/PositionJointInterface" />
+    <xacro:gazebo-joint joint="$(arg arm_id_2)_joint6" transmission="hardware_interface/PositionJointInterface" />
+    <xacro:gazebo-joint joint="$(arg arm_id_2)_joint7" transmission="hardware_interface/PositionJointInterface" />
+
+    <!-- rear right arm joints control interface -->
+    <xacro:gazebo-joint joint="$(arg arm_id_3)_joint1" transmission="hardware_interface/PositionJointInterface" />
+    <xacro:gazebo-joint joint="$(arg arm_id_3)_joint2" transmission="hardware_interface/PositionJointInterface" />
+    <xacro:gazebo-joint joint="$(arg arm_id_3)_joint3" transmission="hardware_interface/PositionJointInterface" />
+    <xacro:gazebo-joint joint="$(arg arm_id_3)_joint4" transmission="hardware_interface/PositionJointInterface" />
+    <xacro:gazebo-joint joint="$(arg arm_id_3)_joint5" transmission="hardware_interface/PositionJointInterface" />
+    <xacro:gazebo-joint joint="$(arg arm_id_3)_joint6" transmission="hardware_interface/PositionJointInterface" />
+    <xacro:gazebo-joint joint="$(arg arm_id_3)_joint7" transmission="hardware_interface/PositionJointInterface" />
+
+    <!-- rear left arm joints control interface -->
+    <xacro:gazebo-joint joint="$(arg arm_id_4)_joint1" transmission="hardware_interface/PositionJointInterface" />
+    <xacro:gazebo-joint joint="$(arg arm_id_4)_joint2" transmission="hardware_interface/PositionJointInterface" />
+    <xacro:gazebo-joint joint="$(arg arm_id_4)_joint3" transmission="hardware_interface/PositionJointInterface" />
+    <xacro:gazebo-joint joint="$(arg arm_id_4)_joint4" transmission="hardware_interface/PositionJointInterface" />
+    <xacro:gazebo-joint joint="$(arg arm_id_4)_joint5" transmission="hardware_interface/PositionJointInterface" />
+    <xacro:gazebo-joint joint="$(arg arm_id_4)_joint6" transmission="hardware_interface/PositionJointInterface" />
+    <xacro:gazebo-joint joint="$(arg arm_id_4)_joint7" transmission="hardware_interface/PositionJointInterface" />
+
+
+    <!-- right hand joints control interface -->
+    <xacro:gazebo-joint joint="$(arg arm_id_1)_finger_joint1" transmission="hardware_interface/EffortJointInterface" />
+    <xacro:gazebo-joint joint="$(arg arm_id_1)_finger_joint2" transmission="hardware_interface/EffortJointInterface" />
+
+    <!-- left hand joints control interface -->
+    <xacro:gazebo-joint joint="$(arg arm_id_2)_finger_joint1" transmission="hardware_interface/EffortJointInterface" />
+    <xacro:gazebo-joint joint="$(arg arm_id_2)_finger_joint2" transmission="hardware_interface/EffortJointInterface" />
+
+    <!-- right hand joints control interface -->
+    <xacro:gazebo-joint joint="$(arg arm_id_3)_finger_joint1" transmission="hardware_interface/EffortJointInterface" />
+    <xacro:gazebo-joint joint="$(arg arm_id_3)_finger_joint2" transmission="hardware_interface/EffortJointInterface" />
+
+    <!-- left hand joints control interface -->
+    <xacro:gazebo-joint joint="$(arg arm_id_4)_finger_joint1" transmission="hardware_interface/EffortJointInterface" />
+    <xacro:gazebo-joint joint="$(arg arm_id_4)_finger_joint2" transmission="hardware_interface/EffortJointInterface" />
+
+
+    <!-- load ros_control plugin -->
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so"/>
+    </gazebo>
+
+</robot>
+```
+</details>
 
 ## Disabling collisions
 The moveit library automatically checks for collisions of links within the .srds created by default. In our case, in order to validate our algorithm we need to make sure that collision checks for the different robots are disabled. 
@@ -18,7 +157,7 @@ In this step we will generate 9 planning groups
 For the robot and gripper planning group follow the instructions on this tutorial, make sure you assign the right joints and links to the right groups. I named my groups as the prefix we used to generate the urdfs (i.e. front_left_arm, front_right_arm, rear_left_arm, rear_right_arm, front_left_hand, front_right_hand, rear_left_hand, rear_right_hand). This makes it easier to check joints and links are in the right group at the end.
 
 ### Multi robot group
-This group is the only one that is different and does not exist in the tutorial. The multirobot group will consist of a 'super' group that contains the 4 robots as subgroups. In order to generate this group click on 'Add Group'. Give the group a name you like, I called it 'multi_arms_group'. Now, click on 'Add Subgroup', next to the Advanced Options and select the 4 robot planning groups you generated in the previous steps.
+This group is the only one that is different and does not exist in the tutorial. The multirobot group will consist of a 'super' group that contains the 4 robots as subgroups. In order to generate this group click on 'Add Group'. Give the group a name you like, I called it 'multi_arms_group'. Now, click on 'Add Subgroup', next find the Advanced Options section and select the 4 robot planning groups you generated in the previous steps.
 
 You can create home_poses for all the robots if you think you are going to need this in the future. The 'open' and 'close' positions for the grippers are particularly useful to have, given that most grippers in real life are controlled by a simple open/close command. I used the same values suggested in the tutorial. 
 
@@ -30,7 +169,7 @@ At the end you should have something similar to this. Note that all the groups a
 
 ## Simulation pane
 The simulation step can be skipped in this case, only because the xacro and respective urdf we created are compatible with gazebo. Gazebo will not work if inertia and transmissions for each link and joints have not been defined. The gazebo controller also needs to be included in the xacro file to control the robot in Gazebo. 
-In theory, PID values should be also added. However, this process is a trial-error endvuar which we do not have the time for. Gazebo will throw an error when we first launch the simulation and use the PID defualt values, you can ignore this, the default values are good enough for us. 
+In theory, PID values should be also added. However, this process is a trial-error endeavour which we do not have the time for. Gazebo will throw an error when we first launch the simulation and use the PID defualt values, you can ignore this, the default values are good enough for us. 
 
 Now proceed with the author page and generate the config files.
 
@@ -48,7 +187,11 @@ In the following steps we are going to create a total of 5 controllers:
 This contreller reads the joints from the srdf file and publishes the state of ALL joints. Therefore, it does not need changing. Follow the tutorial for this.
 
 ### trajectory_controller
-This file will be similar to the one in the tutorial but requires the addition of the 2 rear robots (with the respective grippers). Make sure the names of joints and controllers are consistent with the urdf/xacro file. It will look like something like this:
+This file will be similar to the one in the tutorial but requires the addition of the 2 rear robots (with the respective grippers). Make sure the names of joints and controllers are consistent with the urdf/xacro file. I have also removed the constraints to simplify the inverse kinematics calculations and this tutorial. The file should look like something like this:
+<details>
+<summary>trajectory_controller.yaml</summary>
+
+
 ```
 front_right_arm_trajectory_controller:
     type: "position_controllers/JointTrajectoryController"
@@ -124,6 +267,8 @@ rear_left_hand_controller:
     gains:
         rear_left_arm_finger_joint1:  {p: 50.0, d: 1.0, i: 0.01, i_clamp: 1.0}
 ```
+</details>
+
 ### control_utilis.launch
 Then, we need to create the `control_utils.launch` as per instructions in the tutorial. This will be used to launch several controllers split into 3 nodes:
 - joint state controller - previosuly created, this controller is part of the ros_control family and reads and publishes joint state directly from the robotHardwareInterface (in this case a fake hardware interface given that the joints are provided by Gazebo) _Note this is not to be confused with the joint_state_publisher which is a stand alone node that is not tied with the ros control architecture_
@@ -154,14 +299,10 @@ rear_right_arm_trajectory_controller rear_left_arm_trajectory_controller rear_ri
 </launch>
 ``` 
 ### moveit autogenerated files
-As mentioned before, Moveit automatically generates some launch files and yaml files. We did not use the setup assistant to configure this so we will have to manually change the following:
-- ros_controller.yaml
-- simple_moveit_controller.yaml
+As mentioned before, Moveit automatically generates some launch files and yaml files. The tutorial mentions a coupls of .yaml and .launch files that we need to modify:
+- ros_controller.yaml/.launch
+- simple_moveit_controller.yaml/.launch
+I would not bother with this as these are redunt files which are not used.
 
-- ros_controller.launch
-
-
-empty_world.launch and bring up do not need changing
-Done but need to explain
-
-REMOVE CONSTRAINTS ABOVE DOES SPEED UP THE SIMULATION
+### Gazebo integration
+The files `panda_multiple_arms_empty_world.launch` and  `bringup_moveit.launch` can be left as the tutorial.
