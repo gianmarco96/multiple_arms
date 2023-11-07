@@ -325,3 +325,4 @@ The files `panda_multiple_arms_empty_world.launch` and  `bringup_moveit.launch` 
 If you want to run the demo, open 2 new terminals and copy paste the 2 following commands
 `roslaunch panda_multiple_arms bringup_moveit.launch `
 `rosrun panda_multiple_arms moveit_controller.py`
+When running the demo you might get a ROS:INFO message saying ABORTED:CONTROL_FAILED after motions are executed. If you check the main terminal, the one where you run the gazebo node and the controllers, you will notice that there are some warnings informing you that the GOAL TOLERANCE was violeted. This is caused by the PID controller which has not been tuned for the specific robots. The robots still move to their goal and the error is minuscule ranging from 1 to 40 microns so can be ignored. However, if still an issue it can be fixed by tailoring the PID values or by increasing the goal tolerance.
