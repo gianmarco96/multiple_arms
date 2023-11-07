@@ -1,6 +1,20 @@
 # multiple_arms
 This repo is heavily based on [MoveIt! Multiple Robot Arms Tutorial](https://ros-planning.github.io/moveit_tutorials/doc/multiple_robot_arms/multiple_robot_arms_tutorial.html). The following steps can be applied to any robot platform, however I decided to stick to the panda arm (as apposed to UR, for instance) because these are more prone to multi-robot control, thanks to their more clear xacro/urdf and the absence of custom kinematics or controller (e.g. scaled_controllers).
 
+## Cloning this repo
+If you want to run the code directly without having to do any of the setting up, simply clone this repo, then move to the ke workspace
+```cd ke_ws``` 
+clean the workspace
+```
+catkin clean
+```
+build and source the workspace again
+```
+catkin build
+source devel/setup.bash
+```
+**Note:** All the steps above assume you are starting from the multiple_arms folder
+
 ## Xacro and URDF
 The simulated cell with multiple robots starts with the creation of the xacro file. Once again this step is very similar to the tutorial, I have just added 2 more robots and move all robots closed to each other to make sure they can actually collide (given that the aim of this project is to validate a collision algorithm).
 
