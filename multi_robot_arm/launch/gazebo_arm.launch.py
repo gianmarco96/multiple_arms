@@ -61,18 +61,18 @@ def generate_launch_description():
         name="robot_type", default_value=robot_type, description="Robot type"
     )
 
-    gazebo_server = ExecuteProcess(
-        cmd=[
-            "gzserver",
-            "--verbose",
-            "-u",
-            "-s", "libgazebo_ros_factory.so",
-            "-s", "libgazebo_ros_init.so",
-            world,
-        ],
-        output="screen",
-    )
-    gazebo_client = ExecuteProcess(cmd=["gzclient"], output="screen")
+    # gazebo_server = ExecuteProcess(
+    #     cmd=[
+    #         "gzserver",
+    #         "--verbose",
+    #         "-u",
+    #         "-s", "libgazebo_ros_factory.so",
+    #         "-s", "libgazebo_ros_init.so",
+    #         world,
+    #     ],
+    #     output="screen",
+    # )
+    # gazebo_client = ExecuteProcess(cmd=["gzclient"], output="screen")
 
 
 
@@ -87,8 +87,8 @@ def generate_launch_description():
     robots = [
             {'name': 'arm1', 'x_pose': '-0.7', 'y_pose': '-0.7', 'Y':'0.0'},
             {'name': 'arm2', 'x_pose': '-0.7', 'y_pose': '0.7', 'Y':'0.0'},
-            {'name': 'arm3', 'x_pose': '0.7', 'y_pose': '-0.7', 'Y':'-3.14'},
-            {'name': 'arm4', 'x_pose': '0.7', 'y_pose': '0.7', 'Y':'-3.14'},
+            # {'name': 'arm3', 'x_pose': '0.7', 'y_pose': '-0.7', 'Y':'-3.14'},
+            # {'name': 'arm4', 'x_pose': '0.7', 'y_pose': '0.7', 'Y':'-3.14'},
             # …
             # …
         ]

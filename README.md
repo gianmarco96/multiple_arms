@@ -1,3 +1,11 @@
+**Update: (And NB This will be changed)**
+Work is not finished but it does work now. The problem was with the turtlebot3_multi robot library. The robots could not be spawned all at once, so I have changed some of the code so that each terminal calls one robot. To spawn one robot you need to call the usual launch file AND define initial position as an argument. The initial position currently also needs to be published in the robot_control file I will change that later on so it does is automatically. Make sure the initial positions match in the terminal and in the robot_control script. Also always make sure you assign a different name to the robot you are spawning e.g. tb1. Finally check the map is loaded correctly, you might have to force it in the install folder again if that was deleted. Below an example of the command to be used.
+
+```
+ros2 launch turtlebot3_multi_robot gazebo_multi_nav2_world.launch.py name:='tb1' x_pose:=-3.5 y_pose:=-0.5 z_pose:=0.1
+```
+**End of update**
+
 This repo is heavily based on the 2 following tutorials:
 - [Enabling Multi-Robot ARM in Gazebo for ROS2](https://medium.com/@arshad.mehmood/enabling-multi-robot-arm-in-gazebo-for-ros2-dc18981c03c6)
 - [An Adaptable Approach to Multi-Robot Navigation in ROS2: Utilizing Turtlebot3 and Nav2](https://medium.com/@arshad.mehmood/a-guide-to-multi-robot-navigation-utilizing-turtlebot3-and-nav2-cd24f96d19c6)

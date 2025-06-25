@@ -18,6 +18,7 @@ install(PROGRAMS
     ${EXAMPLES_DIR}/ex_pose_goal.py
     ${EXAMPLES_DIR}/ex_servo.py
     ${EXAMPLES_DIR}/robot_control.py
+    ${EXAMPLES_DIR}/initial_pose_publisher.py
     DESTINATION lib/${PROJECT_NAME}
 )
 

@@ -24,7 +24,7 @@ from moveit_msgs.srv import GetPlanningScene
 from moveit_msgs.msg import PlanningScene
 from moveit_msgs.srv import ApplyPlanningScene
 from shape_msgs.msg import Plane
-
+from geometry_msgs.msg import PoseWithCovarianceStamped
 from time import sleep
 
 # for turtlebot
@@ -37,20 +37,20 @@ cartesian = False
 def main():
     rclpy.init()
     
-    node_tb1 = init_robot("tb1", "mobile")
-    node_tb2 = init_robot("tb2", "mobile")
-    node_tb3 = init_robot("tb3", "mobile")
-    node_tb4 = init_robot("tb4", "mobile")
+    node_tb1 = init_robot("tb1", "mobile", [-3.5, -0.5, 0.1])
+    node_tb2 = init_robot("tb2", "mobile", [-2.5, -0.5, 0.1])
+    node_tb3 = init_robot("tb3", "mobile", [3.5, -0.5, 0.1])
+    node_tb4 = init_robot("tb4", "mobile", [-1.5, -0.5, 0.1])
 
-    node_arm1, arm1 = init_robot("arm1", "arm") 
+    node_arm1, arm1 = init_robot("arm1", "arm", []) 
+
+    # # # Create second node to control arm2
+    node_arm2, arm2= init_robot("arm2", "arm", [])
+
+    # node_arm3, arm3 = init_robot("arm3", "arm") 
 
     # # Create second node to control arm2
-    node_arm2, arm2= init_robot("arm2", "arm")
-
-    node_arm3, arm3 = init_robot("arm3", "arm") 
-
-    # Create second node to control arm2
-    node_arm4, arm4= init_robot("arm4", "arm")
+    # node_arm4, arm4= init_robot("arm4", "arm")
     
     
     
@@ -59,8 +59,8 @@ def main():
 
     executor.add_node(node_arm1)
     executor.add_node(node_arm2)
-    executor.add_node(node_arm3)
-    executor.add_node(node_arm4)
+    # executor.add_node(node_arm3)
+    # executor.add_node(node_arm4)
     
     executor.add_node(node_tb1)
     executor.add_node(node_tb2)
@@ -73,31 +73,31 @@ def main():
     executor_thread.start()
     add_ground_plane(node_arm1)
     add_ground_plane(node_arm2)
-    add_ground_plane(node_arm3)
-    add_ground_plane(node_arm4)
+    # add_ground_plane(node_arm3)
+    # add_ground_plane(node_arm4)
 
-    x_y_pos = [0.3,  0.1]
+    x_y_pos = [0.3,  0.10]
 
     try:
         robot_move(arm1, node_arm1, x_y_pos)
         robot_move(arm2, node_arm2, x_y_pos)
         sleep(2)
-        robot_move(arm3, node_arm3, x_y_pos)
-        robot_move(arm4, node_arm4, x_y_pos)
+        # robot_move(arm3, node_arm3, x_y_pos)
+        # robot_move(arm4, node_arm4, x_y_pos)
 
 
-        robot_move(None, node_tb1, [-3.0, -0.5])
-        robot_move(None, node_tb2, [-3.0, 0.5])
+        robot_move(None, node_tb1, [3.0, -0.5])
+        robot_move(None, node_tb2, [3.0, 0.5])
         sleep(2)
-        robot_move(None, node_tb3, [2.0, -0.5])
-        robot_move(None, node_tb4, [2.0, 0.5])
+        robot_move(None, node_tb3, [3.0, -0.5])
+        robot_move(None, node_tb4, [3.0, 0.5])
         # print("I'm here")
         # node_tb1.publish_pose()
     except Exception as err:
         node_arm1.get_logger().info(f'Exception occured. {err}')
         node_arm2.get_logger().info(f'Exception occured. {err}')
-        node_arm3.get_logger().info(f'Exception occured. {err}')
-        node_arm4.get_logger().info(f'Exception occured. {err}')
+        # node_arm3.get_logger().info(f'Exception occured. {err}')
+        # node_arm4.get_logger().info(f'Exception occured. {err}')
 
         node_tb1.get_logger().info(f'Exception occured. {err}')
         node_tb2.get_logger().info(f'Exception occured. {err}')
@@ -135,7 +135,7 @@ def add_ground_plane(node):
     publisher_ = node.create_publisher(PlanningScene, 'planning_scene', 10)
     publisher_.publish(scene)
 
-def init_robot(_namespace, type):
+def init_robot(_namespace, type, initial_pose):
     if type == "arm":
         # Create first node to control arm1
         node = Node("robot_controller", namespace=_namespace)
@@ -155,26 +155,30 @@ def init_robot(_namespace, type):
             callback_group=callback_group
         )
         return node, moveit2
+    
     if type == "mobile":
         node = mobile_robot(_namespace)
+        node.publish_pose_with_co(initial_pose)
         return node
 
 
 def robot_move(moveit2, node, x_y_pos):
     if moveit2 == None:
         node.publish_pose(x_y_pos)
-        node.get_logger().info(f'Mobile robot movement completed')
+        node.get_logger().info(f'Mobile robot pose goal sent to robot')
     else:
         position[0] = x_y_pos[0]
         position[1] = x_y_pos[1]
         moveit2.move_to_pose(position=position, quat_xyzw=quat_xyzw, cartesian=cartesian)
-        node.get_logger().info(f'Arm movement completed')
+        node.get_logger().info(f'Arm pose goal sent to robot')
 
 class mobile_robot(Node):
     def __init__(self, namespace):
         super().__init__(namespace)
         self.topic = namespace + '/goal_pose'
+        self.initial_pose_topic = namespace + '/initialpose'
         self.publisher = self.create_publisher(PoseStamped, self.topic, 10)
+        self.publisherWithCo = self.create_publisher(PoseWithCovarianceStamped, self.initial_pose_topic, 10)
 
     def publish_pose(self, x_y_pos):
         pose_msg = PoseStamped()
@@ -184,7 +188,18 @@ class mobile_robot(Node):
         pose_msg.pose.position.y = x_y_pos[1]
         pose_msg.pose.orientation.w = 1.0
         self.publisher.publish(pose_msg)
-        sleep(1)
+        sleep(0.3)
+
+    def publish_pose_with_co(self, initial_pose):
+        pose_msg = PoseWithCovarianceStamped()
+        pose_msg.header.frame_id = 'map'
+        pose_msg.header.stamp = self.get_clock().now().to_msg()
+        pose_msg.pose.pose.position.x = initial_pose[0]
+        pose_msg.pose.pose.position.y = initial_pose[1]
+        pose_msg.pose.pose.position.y = initial_pose[2]
+        pose_msg.pose.pose.orientation.w = 1.0
+        self.publisherWithCo.publish(pose_msg)
+        sleep(0.1)
 
 
 

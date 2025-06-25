@@ -1,0 +1,23 @@
+import rclpy
+from rclpy.node import Node
+from std_msgs.msg import String  # Change this to your required message type
+
+class OneShotPublisher(Node):
+    def __init__(self):
+        super().__init__('one_shot_publisher')
+
+        self.declare_parameter('message_data', 'Hello, ROS 2!')
+        msg_text = self.get_parameter('message_data').get_parameter_value().string_value
+
+        self.publisher_ = self.create_publisher(String, 'my_topic', 10)
+
+        self.msg = String()
+        self.msg.data = msg_text
+
+        self.timer = self.create_timer(0.5, self.publish_once)
+
+    def publish_once(self):
+        self.publisher_.publish(self.msg)
+        self.get_logger().info(f'Published: "{self.msg.data}"')
+        self.timer.cancel()
+        self.destroy_node()

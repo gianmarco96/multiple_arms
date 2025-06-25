@@ -69,8 +69,8 @@ def generate_launch_description():
     ld.add_action(gzserver_cmd)
     ld.add_action(gzclient_cmd)
 
-    ROWS = 1
-    COLS = 2
+    ROWS = 5
+    COLS = 5
 
     x = -ROWS
     y = -COLS
@@ -105,7 +105,7 @@ def generate_launch_description():
                 executable="spawn_entity.py",
                 arguments=[
                     "-file",
-                    os.path.join(turtlebot3_multi_robot,"models", "turtlebot3_" + TURTLEBOT3_MODEL, "model.sdf"),
+                    os.path.join(turtlebot3_multi_robot,'models', 'turtlebot3_' + TURTLEBOT3_MODEL, 'model.sdf'),
                     "-entity",
                     name,
                     "-robot_namespace",
